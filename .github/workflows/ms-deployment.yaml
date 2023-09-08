@@ -19,7 +19,7 @@ jobs:
 
       - name: buil-docker-image
         run: |
-          docker build -t ghcr.io/juanhz0101/ms-springboot-image:latest .
+          docker build -t ghcr.io/juanhz0101/poc-ms-java/ms-springboot-image:latest .
         
       - name: docker-login
         run: |
@@ -28,4 +28,4 @@ jobs:
         
       - name: docker-push
         run: |
-          docker push ghcr.io/juanhz0101/ms-springboot-image:latest
+          docker push ghcr.io/juanhz0101/poc-ms-java/ms-springboot-image:latest
