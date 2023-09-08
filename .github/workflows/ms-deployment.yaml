@@ -1,0 +1,31 @@
+name: ms-springboot-deployment
+on:
+  push:
+
+jobs:
+  deploy:
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: build
+        run: |
+          gradle version
+          java --version
+          gradle build
+
+      - name: buil-docker-image
+        run: |
+          docker build -t ghcr.io/juanhz0101/ms-springboot-image:latest .
+        
+      - name: docker-login
+        run: |
+          export CR_PAT=${{ secrets.MY_PAT }}
+          echo $CR_PAT | docker login ghcr.io -u juanhz0101 --password-stdin
+        
+      - name: docker-push
+        run: |
+          docker push ghcr.io/juanhz0101/ms-springboot-image:latest
